@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import Hero from '../components/Hero';
@@ -9,6 +9,137 @@ import { supporters } from '../data/supporters';
 import { mediaItems } from '../data/media';
 import i18n from '../i18n';
 import { useMeta } from '../hooks/useMeta';
+
+// MV 播放器组件（带自定义封面）
+function MVPlayer() {
+  const [isPlaying, setIsPlaying] = useState(false);
+  const { i18n } = useTranslation();
+
+  if (isPlaying) {
+    return (
+      <div style={{ maxWidth: '400px', margin: '0 auto 3rem' }}>
+        <div
+          style={{
+            position: 'relative',
+            paddingBottom: '177.78%',
+            height: 0,
+            overflow: 'hidden',
+            borderRadius: '0.75rem',
+            boxShadow: '0 10px 30px rgba(0,0,0,0.1)',
+          }}
+        >
+          <iframe
+            src="//player.bilibili.com/player.html?isOutside=true&aid=115774517746203&bvid=BV1DAB7BZEsb&cid=34953691553&p=1&autoplay=1&danmaku=0&high_quality=1&muted=1"
+            scrolling="no"
+            frameBorder="0"
+            allowFullScreen
+            allow="autoplay"
+            style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              width: '100%',
+              height: '100%',
+            }}
+            title="有情觉 MV"
+          />
+        </div>
+        <p style={{ textAlign: 'center', marginTop: '0.5rem', fontSize: '0.75rem', color: '#6b7280' }}>
+          {i18n.language === 'zh' ? '如未自动播放，请点击视频播放按钮' : 'If not playing automatically, please click the video play button'}
+        </p>
+      </div>
+    );
+  }
+
+  return (
+    <div style={{ maxWidth: '400px', margin: '0 auto 3rem' }}>
+      <div
+        style={{
+          position: 'relative',
+          paddingBottom: '177.78%',
+          height: 0,
+          overflow: 'hidden',
+          borderRadius: '0.75rem',
+          boxShadow: '0 10px 30px rgba(0,0,0,0.1)',
+          cursor: 'pointer',
+        }}
+        onClick={() => setIsPlaying(true)}
+      >
+        {/* 封面图片 */}
+        <img
+          src="/assets/youqingjue-cover.jpg"
+          alt="有情觉 MV 封面"
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            pointerEvents: 'none',
+          }}
+        />
+        {/* 播放按钮遮罩 */}
+        <div
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            background: 'rgba(0,0,0,0.3)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            transition: 'background 0.3s ease',
+            pointerEvents: 'none',
+          }}
+        >
+          {/* 播放按钮 */}
+          <div
+            style={{
+              width: '80px',
+              height: '80px',
+              borderRadius: '50%',
+              background: 'rgba(255,255,255,0.9)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              boxShadow: '0 4px 20px rgba(0,0,0,0.3)',
+              transition: 'transform 0.3s ease',
+              pointerEvents: 'none',
+            }}
+          >
+            <svg
+              width="32"
+              height="32"
+              viewBox="0 0 24 24"
+              fill="var(--color-primary)"
+              style={{ marginLeft: '4px', pointerEvents: 'none' }}
+            >
+              <path d="M8 5v14l11-7z" />
+            </svg>
+          </div>
+        </div>
+        {/* 提示文字 */}
+        <div
+          style={{
+            position: 'absolute',
+            bottom: '1rem',
+            left: 0,
+            right: 0,
+            textAlign: 'center',
+            color: 'white',
+            fontSize: '0.875rem',
+            textShadow: '0 2px 4px rgba(0,0,0,0.5)',
+          }}
+        >
+          {i18n.language === 'zh' ? '点击播放 MV' : 'Click to play MV'}
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default function Home() {
   const { t, i18n: i18nInstance } = useTranslation();
@@ -655,33 +786,7 @@ export default function Home() {
           </div>
 
           {/* MV 视频 */}
-          <div style={{ maxWidth: '400px', margin: '0 auto 3rem' }}>
-            <div
-              style={{
-                position: 'relative',
-                paddingBottom: '177.78%',
-                height: 0,
-                overflow: 'hidden',
-                borderRadius: '0.75rem',
-                boxShadow: '0 10px 30px rgba(0,0,0,0.1)',
-              }}
-            >
-              <iframe
-                src="//player.bilibili.com/player.html?isOutside=true&aid=115774517746203&bvid=BV1DAB7BZEsb&cid=34953691553&p=1"
-                scrolling="no"
-                frameBorder="0"
-                allowFullScreen
-                style={{
-                  position: 'absolute',
-                  top: 0,
-                  left: 0,
-                  width: '100%',
-                  height: '100%',
-                }}
-                title="有情觉 MV"
-              />
-            </div>
-          </div>
+          <MVPlayer />
 
           {/* 制作信息 */}
           <div

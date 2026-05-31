@@ -342,7 +342,11 @@ export default function Footer() {
         <div style={{
           borderTop: '1px solid rgba(255,255,255,0.1)',
           paddingTop: '2rem',
-          textAlign: 'center',
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          flexWrap: 'wrap',
+          gap: '1rem',
         }}>
           <p style={{
             fontSize: '0.875rem',
@@ -350,6 +354,25 @@ export default function Footer() {
           }}>
             © {currentYear} Wing Dance Theatre. {t('footer.copyright')}
           </p>
+          <a
+            href="https://vipassana.top"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              fontSize: '0.75rem',
+              color: 'rgba(255,255,255,0.4)',
+              textDecoration: 'none',
+              transition: 'color 0.3s ease',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.color = 'rgba(255,255,255,0.7)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.color = 'rgba(255,255,255,0.4)';
+            }}
+          >
+            {i18n.language === 'zh' ? '技术支持：果瑞' : 'Technical Support: Guorui'}
+          </a>
         </div>
       </div>
     </footer>
