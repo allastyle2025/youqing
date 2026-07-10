@@ -79,5 +79,10 @@ export const supporters: Supporter[] = [
     id: 15,
     name: "Strawberry Fields",
     image: "/assets/supporters/supporter-14.png"
+  },
+  {
+    id: 16,
+    name: "悦意生活",
+    image: "/assets/supporters/yesnature-logo.png"
   }
 ];

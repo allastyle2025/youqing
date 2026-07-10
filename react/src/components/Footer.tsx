@@ -66,7 +66,6 @@ export default function Footer() {
       color: 'white',
       padding: '4rem 0 2rem',
       position: 'relative',
-      overflow: 'hidden',
     }}>
       {/* 皮革纹理背景 */}
       <div style={{
@@ -75,6 +74,7 @@ export default function Footer() {
         left: 0,
         right: 0,
         bottom: 0,
+        overflow: 'hidden',
         opacity: 0.15,
         pointerEvents: 'none',
         backgroundImage: `
